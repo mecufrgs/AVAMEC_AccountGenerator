@@ -15,7 +15,10 @@ public class GeneratorController implements IGeneratorController {
     @Override
     @PostMapping("/create_users/{nome}")
     public ResponseEntity<?> createUsers(@PathVariable String nome) {
-        return generatorService.criar(nome);
+        if(nome != null){
+            return generatorService.criar(nome);
+        }
+        return new ResponseEntity<>("Nome não pode ser nulo.", HttpStatus.ERROR);
     }
 
 }
